@@ -1,10 +1,10 @@
 import unittest
-from dll_queue import Queue
+from dll_queue import QueueLambda
 
 
 class QueueTests(unittest.TestCase):
     def setUp(self):
-        self.q = Queue()
+        self.q = QueueLambda()
 
     def test_len_returns_0_for_empty_queue(self):
         self.assertEqual(self.q.len(), 0)

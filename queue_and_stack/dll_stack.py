@@ -1,18 +1,23 @@
 from doubly_linked_list import DoublyLinkedList
-import sys
-sys.path.append('../doubly_linked_list')
 
-class Stack:
+
+class StackLambda:
     def __init__(self):
         self.size = 0
         # Why is our DLL a good choice to store our elements?
-        # self.storage = ?
+        self.storage = DoublyLinkedList()
 
     def push(self, value):
-        pass
+        self.storage.add_to_head(value)
+        return
 
     def pop(self):
-        pass
+        if self.len() <= 0:
+            return
+        else:
+            value = self.storage.head.value
+            self.storage.remove_from_head()
+            return value
 
     def len(self):
-        pass
+        return len(self.storage)
