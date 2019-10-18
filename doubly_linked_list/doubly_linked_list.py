@@ -135,15 +135,20 @@ class DoublyLinkedList:
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
     def move_to_front(self, node):
-        if node != self.head:
-            c_next = node.next
-            c_prev = node.prev
-            node.prev.next = c_next
-            node.next.prev = c_prev
+        if self.length <= 1:
+            return
+        elif (self.length == 2) & (node != self.head):
+            self.head, self.tail = self.tail, self.head
+            return
+        elif (node != self.head) & (self.length > 2):
+            if self.tail == node:
+                self.tail = node.prev
+            node.prev.next = node.next
+            node.next.prev = node.prev
+            self.head.prev = node
+            self.tail.next = node
             node.next = self.head
             node.prev = self.tail
-            self.head.next = node
-            self.tail.prev = node
             self.head = node
         else:
             return
@@ -157,6 +162,8 @@ class DoublyLinkedList:
         elif (self.length == 2) & (node != self.tail):
             self.head, self.tail = self.tail, self.head
         elif (node != self.tail) & (self.length > 2):
+            if node == self.head:
+                self.head = node.next
             node.prev.next = node.next
             node.next.prev = node.prev
             self.head.prev = node
